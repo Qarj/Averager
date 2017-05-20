@@ -2,4 +2,4 @@
 
 Calculates a simple moving average.
 
-A console app called AveragerDemo included to demo how it works.
+A console app called AveragerDemo is included to demonstrate how it works.
