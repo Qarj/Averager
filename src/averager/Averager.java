@@ -8,23 +8,9 @@ import java.util.ArrayDeque;
  */
 public abstract class Averager {
 
-    class item {
-        private double value;
-        
-        public item (double value) {
-            this.value = value;
-        }
-        
-        public double getValue () {
-            return this.value;
-        }
-       
-    }   
-    
     protected long length;
     protected double average = 0;
     protected double total = 0;
-    protected ArrayDeque<item> items = new ArrayDeque<item>();
     
     public Averager (long length)
     {
@@ -32,13 +18,12 @@ public abstract class Averager {
             throw new IllegalArgumentException("Length of Averager must be greater than zero");
         }
         this.length = length;
+
     }
 
     public double getAverage() {
         return average;
     }
-
-    public abstract double addItem(double value);
     
 }
 

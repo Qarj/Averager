@@ -1,6 +1,7 @@
 package averagerdemo;
 
 import averager.SimpleMovingAverage_Length;
+import averager.SimpleMovingAverage_Time;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,27 +12,97 @@ import java.util.Scanner;
 public class AveragerDemo {
 
     public static void main(String[] args) {
-        AveragerDemo demo = new AveragerDemo();
+        int choice = 0;
+        
+        while (choice < 1 || choice > 2) {
+            choice = getChoice();
+        }
+
+        switch (choice)
+        {
+            case 1:
+                SMA_Length();
+                break;
+            case 2:
+                SMA_Time();
+                break;
+            default:
+                System.out.println("Your choice was not recognised.");
+        }
+        
+    }
+
+    public static void SMA_Length() {
+        ReadConsole console = new ReadConsole();
 
         System.out.println("Enter length of Simple Moving Average:");
-        long length = demo.getIntFromConsole();
+        long length = console.readInt();
         SimpleMovingAverage_Length smal = new SimpleMovingAverage_Length(length);
         
         double value = 42;
         
         while (value != 0)
         {
+            //obviously 0 is a valid value, but not for this demo
             System.out.println("Enter a new value, or 0 to quit:");
-            value = demo.getDoubleFromConsole();
+            value = console.readDouble();
             if (value != 0) {
                 System.out.println("New moving average is " + smal.addItem(value) + "\n");
             }
         }
     }
+    
+    public static void SMA_Time() {
+        ReadConsole console = new ReadConsole();
+
+        System.out.println("Enter time units length of Simple Moving Average:");
+        long length = console.readInt();
+        SimpleMovingAverage_Time smat = new SimpleMovingAverage_Time(length);
+        
+        double value = 0;
+        int time = 42;
+        int lastTime = 0; //assumes only positive values will be entered in the demo
+        
+        while (time != 0)
+        {
+            System.out.println("Enter a new value:");
+            value = console.readDouble();
+            System.out.println("Enter time of new value, or 0 to quit:");
+            time = console.readInt();
+            if (time != 0) {
+                if (time < lastTime) {
+                    System.out.println("Time invalid, cannot be less than previous entry!");
+                } else {
+                    System.out.println("New moving average is " + smat.addItem(value, time) + "\n");
+                }
+            }
+            lastTime = time;
+        }
+    }
+
+    public static int getChoice()
+    {
+        ReadConsole console = new ReadConsole();
+        int choice;
+        
+        System.out.println("CHOOSE AVERAGER TO DEMO");
+        System.out.println("=======================");
+        System.out.println("1) Simple Moving Average - Length");
+        System.out.println("2) Simple Moving Average - Time");
+        
+        choice = console.readInt();
+        
+        return choice;
+    }
+
+    
+}
+
+class ReadConsole {
 
     final Scanner reader = new Scanner(System.in);
 
-    private double getDoubleFromConsole()
+    public double readDouble()
     {
         Double myDouble = null;
         String input;
@@ -62,7 +133,7 @@ public class AveragerDemo {
         return (double) myDouble;
     }
 
-    private int getIntFromConsole()
+    public int readInt()
     {
         Integer myInt = null;
         String input;
