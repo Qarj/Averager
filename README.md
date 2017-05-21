@@ -21,12 +21,14 @@ Calculates a simple moving average - based on the age of the samples, samples ol
 ```java
 import averager.SimpleMovingAverage_Time;
 
+...
+
 long keepTimeUnits = 100;
 SimpleMovingAverage_Time smat = new SimpleMovingAverage_Time(keepTimeUnits);
 
 double value = 5.5;
 long currentTimeUnits = 5000;
-double newAverage = smal.addItem(value, currentTimeUnits);
+double newAverage = smat.addItem(value, currentTimeUnits);
 ```
 
 A console app called AveragerDemo is included to demonstrate how it works.
