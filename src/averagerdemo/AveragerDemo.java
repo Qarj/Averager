@@ -14,7 +14,7 @@ public class AveragerDemo {
     public static void main(String[] args) {
         int choice = 0;
         
-        while (choice < 1 || choice > 2) {
+        while (choice < 1 || choice > 3) {
             choice = getChoice();
         }
 
@@ -25,6 +25,9 @@ public class AveragerDemo {
                 break;
             case 2:
                 SMA_Time();
+                break;
+            case 3:
+                SMA_Bearing();
                 break;
             default:
                 System.out.println("Your choice was not recognised.");
@@ -80,6 +83,26 @@ public class AveragerDemo {
         }
     }
 
+    public static void SMA_Bearing() {
+        ReadConsole console = new ReadConsole();
+
+        System.out.println("Enter length of Simple Moving Average:");
+        long length = console.readInt();
+        SimpleMovingAverage_Length smal = new SimpleMovingAverage_Length(length);
+        
+        double value = 42;
+        
+        while (value != 1000)
+        {
+            //obviously 0 is a valid value, but not for this demo
+            System.out.println("Enter a new bearing, or 1000 to quit:");
+            value = console.readDouble();
+            if (value != 1000) {
+                System.out.println("New moving average is " + smal.addItem(value) + "\n");
+            }
+        }
+    }
+
     public static int getChoice()
     {
         ReadConsole console = new ReadConsole();
@@ -89,6 +112,7 @@ public class AveragerDemo {
         System.out.println("=======================");
         System.out.println("1) Simple Moving Average - Length");
         System.out.println("2) Simple Moving Average - Time");
+        System.out.println("3) Simple Moving Average - Bearing");
         
         choice = console.readInt();
         
