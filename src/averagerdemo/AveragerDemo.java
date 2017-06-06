@@ -1,5 +1,6 @@
 package averagerdemo;
 
+import averager.SimpleMovingAverage_Bearing;
 import averager.SimpleMovingAverage_Length;
 import averager.SimpleMovingAverage_Time;
 import java.util.InputMismatchException;
@@ -88,7 +89,7 @@ public class AveragerDemo {
 
         System.out.println("Enter length of Simple Moving Average:");
         long length = console.readInt();
-        SimpleMovingAverage_Length smal = new SimpleMovingAverage_Length(length);
+        SimpleMovingAverage_Bearing smab = new SimpleMovingAverage_Bearing(length);
         
         double value = 42;
         
@@ -98,7 +99,7 @@ public class AveragerDemo {
             System.out.println("Enter a new bearing, or 1000 to quit:");
             value = console.readDouble();
             if (value != 1000) {
-                System.out.println("New moving average is " + smal.addItem(value) + "\n");
+                System.out.println("New moving average is " + smab.addItem(value) + "\n");
             }
         }
     }
