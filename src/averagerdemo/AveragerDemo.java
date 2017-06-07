@@ -1,5 +1,6 @@
 package averagerdemo;
 
+import averager.SimpleMovingAverage_BearingTime;
 import averager.SimpleMovingAverage_Bearing;
 import averager.SimpleMovingAverage_Length;
 import averager.SimpleMovingAverage_Time;
@@ -15,7 +16,7 @@ public class AveragerDemo {
     public static void main(String[] args) {
         int choice = 0;
         
-        while (choice < 1 || choice > 3) {
+        while (choice < 1 || choice > 4) {
             choice = getChoice();
         }
 
@@ -29,6 +30,9 @@ public class AveragerDemo {
                 break;
             case 3:
                 SMA_Bearing();
+                break;
+            case 4:
+                SMA_BearingTime();
                 break;
             default:
                 System.out.println("Your choice was not recognised.");
@@ -104,6 +108,37 @@ public class AveragerDemo {
         }
     }
 
+    public static void SMA_BearingTime() {
+        ReadConsole console = new ReadConsole();
+
+        System.out.println("Enter time units of Simple Moving Average:");
+        long length = console.readInt();
+        SimpleMovingAverage_BearingTime smabt = new SimpleMovingAverage_BearingTime(length);
+        
+        double value = 0;
+        int time = 42;
+        int lastTime = 0; //assumes only positive values will be entered in the demo
+
+        while (time != 0)
+        {
+            System.out.println("Enter a new bearing:");
+            value = console.readDouble();
+            System.out.println("Enter time of new bearing, or 0 to quit:");
+            time = console.readInt();
+            if (time != 0) {
+                if (time < lastTime) {
+                    System.out.println("Time invalid, cannot be less than previous entry!");
+                } else {
+                    System.out.println("New moving average is " + smabt.addItem(value, time) + "\n");
+                }
+            }
+            lastTime = time;
+        }
+
+
+
+    }
+
     public static int getChoice()
     {
         ReadConsole console = new ReadConsole();
@@ -114,6 +149,7 @@ public class AveragerDemo {
         System.out.println("1) Simple Moving Average - Length");
         System.out.println("2) Simple Moving Average - Time");
         System.out.println("3) Simple Moving Average - Bearing");
+        System.out.println("4) Simple Moving Average - BearingTime");
         
         choice = console.readInt();
         
