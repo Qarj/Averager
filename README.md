@@ -68,5 +68,10 @@ double newAverage = smabt.addItem(8, 5120);                 // Average is 6.5
 double newAverage = smabt.addItem(2, 5300);                 // Average is 2
 ```
 
+The Android app, Pointy Arrow, implements the bearing time averager. It averages
+all compass bearings within the last second to smooth the arrow movements. See it here:
+
+https://play.google.com/store/apps/details?id=qarj.pointyarrow
+
 # Demo
 A console app called AveragerDemo is included to demonstrate how it works.
